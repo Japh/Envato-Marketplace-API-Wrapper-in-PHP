@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Wrapper class for the Envato marketplaces API.
+ *
+ * @author Jeffrey Way <jeffrey@envato.com>
+ * @created April, 2011 
+ * @license Do-whateva-ya-want-with-it
+*/ 
+
+
 class Envato_marketplaces {
    public $api_key;
    protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
    
   /**
+   * Attach your API key. 
+   *
    * @param string $api_key Can be accessed on the marketplaces via My Account 
    * -> My Settings -> API Key
    */
@@ -14,6 +25,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve the value of your API KEY, if needed.
+   *
    * @return string The requested API Key.
    */
    public function get_api_key()
@@ -42,6 +55,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Can be used to verify if a person did in fact purchase your item.
+   *
    * @param $user_name Author's username.
    * @param $purchase_code - The buyer's purchase code. See Downloads page for 
    * receipt.
@@ -54,6 +69,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Helper method to retrieve the balance on your account.
+   *
    * @param string $user_name The username attached to your API KEY.
    * @return string The balance in your account.
    */
@@ -64,6 +81,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve details for your most recent sales.
+   *
    * @param string $user_name The username attached to your API KEY.
    * @param int $limit The number of sales to return.
    * @return array A list of your recent sales.
@@ -75,6 +94,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve your account information -- balance, location, name, etc.
+   *
    * @param string $user_name The username attached to your API KEY.
    * @return array A list of account information for the user.
    */
@@ -84,6 +105,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Grab quick monthly stats - number of sales, income, etc.
+   *
    * @param string $user_name The username attached to your API KEY.
    * @param int $limit The number of months to return.
    * @return array A list of sales figures, ordered by month.
@@ -95,6 +118,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Generic method, to be used in combination with the marketplace API docs.
+   *
    * @param string $user_name The user name of the seller to track.
    * @return array The returned data wrapped in an array.
    */
@@ -105,6 +130,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Returns the featured item, author, and free file for a given marketplace.
+   *
    * @param string $marketplace_name The desired marketplace name. 
    * @return array The featured file, free file, and featured author for the 
    * given site.
@@ -116,6 +143,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve the details for a specific marketplace item.
+   *
    * @param string $item_id The id of the item you need information for. 
    * @return object Details for the given item.
    */
@@ -126,6 +155,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Returns new files from a specific marketplaces and category.
+   *
    * @param string $marketplace_name The desired marketplace name.
    * @param string $category The name of the category you'd like to search.
    * @param int $limit The number of files to return.
@@ -140,6 +171,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Similar to new_files, but focuses on a specific author's files.
+   *
    * @param string $user_name The desired username.
    * @param string $marketplace_name The desired marketplace name.
    * @param int $limit The number of files to return.
@@ -154,11 +187,11 @@ class Envato_marketplaces {
       // to the limit. 
       return $this->apply_limit($new_files, $limit);
    }
-
-   // Helper function. For more control, use new_files_from_user method 
-   // instead.
    
   /**
+   * Helper function which automatically echos out a list of thumbnails 
+   * + links. Use new_files_from_user for more control.
+   *
    * @param string $user_name The username of the account you want to display 
    * thumbnails from.
    * @param string $marketplace_name The desired marketplace name.
@@ -184,6 +217,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve the most popular files of the previous week.
+   *
    * @param string $marketplace_name Desired marketplace name.
    * @param int $limit The number of items to return [optional].
    * @return array A list of the most sold items in the given marketplace last 
@@ -197,6 +232,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Perform search queries on all of the marketplaces, or a specific one. 
+   *
    * @param string $search_expression What are you searching for?
    * @param string $marketplace_name The name of the marketplace you want to 
    * search. [optional] 
@@ -217,6 +254,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieves general marketplace member information.
+   *
    * @param string $user_name The username to query.
    * @return object Contains the requested user information.
    */
@@ -227,6 +266,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Retrieve an array of all the items in a particular collection.
+   *
    * @param string $collection_id The id of the requested collection. See url 
    * of collection page for id.
    * @return array A list of all the items in the collection.
@@ -238,6 +279,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * Filters returned result, according to the supplied $limit.
+   *
    * @param string $orig_arr The original array to work on.
    * @param int $limit Specifies the number of array items in the result.
    * @return array A new array with a count equal to the passed $limit.
@@ -257,6 +300,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * General purpose function to query the marketplace API.
+   *
    * @param string $url The url to access, via curl.
    * @return object The results of the curl request.
    */
@@ -274,6 +319,8 @@ class Envato_marketplaces {
    }
 
   /**
+   * A simple convenience function to save a few seconds during development.
+   *
    * @param $data The array or object to display on the page, for testing.
    */
    public function prettyPrint($data)

@@ -26,16 +26,31 @@ class Envato_marketplaces {
     * Available sets => 'vitals', 'earnings-and-sales-by-month', 'statement', 'recent-sales', 'account', 'verify-purchase', 'download-purchase'
     * 
     */ 
-   public function private_user_data($user_name, $set)
+   public function private_user_data($user_name, $set, $purchase_code = null)
    {
       if ( ! isset($this->api_key) ) return 'You have not set an api key yet.';
       if (! isset($set) ) return 'Missing parameters';
 
-      $url = "http://marketplace.envato.com/api/edge/" .  $user_name . "/" . $this->api_key . "/" . $set . ".json";
+      $url = "http://marketplace.envato.com/api/edge/$user_name/$this->api_key/$set";
+      if ( !is_null($purchase_code) ) $url .= ":$purchase_code";
+      $url .= '.json';
+
       $result = $this->curl($url);
-      
-      if ( isset($result->error) ) return 'Username and/or API Key invalid.';
+
+      if ( isset($result->error) ) return 'Username, API Key, or purchase code is invalid.';
       return $result->$set;
+   }
+
+  /**
+   * @param $user_name Author's username.
+   * @param $purchase_code - The buyer's purchase code. See Downloads page for 
+   * receipt.
+   * @return object|bool If purchased, returns an object containing the details.
+   */ 
+   public function verify_purchase($user_name, $purchase_code)
+   {
+      $validity = $this->private_user_data($user_name, 'verify-purchase', $purchase_code);
+      return isset($validity->buyer) ? $validity : false;
    }
 
   /**
@@ -80,8 +95,7 @@ class Envato_marketplaces {
    }
 
   /**
-   * @param string $user_name General purpose function for accessing 
-   * a collection.js file.
+   * @param string $user_name The user name of the seller to track.
    * @return array The returned data wrapped in an array.
    */
    public function public_user_data($user_name)

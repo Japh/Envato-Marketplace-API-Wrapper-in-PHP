@@ -11,7 +11,12 @@ Next, create a new instance of the class:
 
 And that's really it. You now have access to all of the available functions. 
 
-### Examples (to be updated)
+### Examples 
+
+#### Quickly Echo Thumbnails of a User's Items
+    $Envato = new Envato_marketplaces();
+    $Envato->display_thumbs('your username', 'desired marketplace name', 'number to display');
+
 #### Search for Sliders Across all Marketplaces
     $Envato = new Envato_marketplaces();
     $sliders = $Envato->search('sliders');
@@ -85,7 +90,40 @@ And that's really it. You now have access to all of the available functions.
        </a>
     <?php endforeach; ?>
 
+#### Get Your Recent Sales Data
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+    $Envato->set_api_key('your api key');
+    $sales = $Envato->recent_sales('your username', 'optional limit');
 
+    # Review what we got back
+    $Envato->prettyPrint($sales);
 
-   
+#### Get Earnings By Month
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+    $Envato->set_api_key('your api key');
 
+    $monthly_earnings = $Envato->earnings_by_month('your username', 'optional limit');
+
+    # For review...
+    $Envato->prettyPrint($monthly_earnings);
+
+#### Get Your Account Info
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+    $Envato->set_api_key('your api key');
+
+    $account_info = $Envato->account_information('JeffreyWay');
+
+    # See what we got back....
+    $Envato->prettyPrint($account_info);
+
+#### Get Trending Items on Marketplace
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+    
+    $pop = $Envato->most_popular_last_week('marketplace name', 'optional limit');
+
+    # Result Array
+    $Envato->prettyPrint($pop);

@@ -70,7 +70,7 @@ class Envato_marketplaces {
    * @param int $limit The number of months to return.
    * @return array A list of sales figures, ordered by month.
    */
-   public function earnings_by_month($user_name, $limit)
+   public function earnings_by_month($user_name, $limit = null)
    {
       $earnings = $this->private_user_data($user_name, 'earnings-and-sales-by-month');
       return $this->apply_limit($earnings, $limit);
@@ -155,6 +155,7 @@ class Envato_marketplaces {
       
       echo "<ul> \n";
       foreach($results as $item) : ?>
+      <?php if ( is_null($item) ) break; ?>
       <li>
           <a href="<?php echo $item->url; ?>">   
              <img src="<?php echo $item->thumbnail; ?>" />
@@ -228,8 +229,11 @@ class Envato_marketplaces {
    {
       if ( !is_int($limit) ) return $orig_arr;
 
+      // Make sure that there are enough items to filter through... 
+      if ( $limit > count($orig_arr) ) $limit = count($orig_arr);
+
       $new_arr = array();
-      for ( $i = 1; $i <= $limit; $i++ ) {
+      for ( $i = 0; $i <= $limit - 1; $i++ ) {
          $new_arr[] = $orig_arr[$i];
       }
       return $new_arr;

@@ -68,6 +68,23 @@ And that's really it. You now have access to all of the available functions.
        <img src="<?php echo $item->live_preview_url; ?>" alt="<?php echo $item->item; ?>" />
     </a>
 
+#### Display Your Own Recent Items
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+   
+    # marketplace name, desired category, optional limit (number of items to return)
+    $files = $Envato->new_files_from_user('Your Username', 'desired marketplace name', 5);
+
+    #See what we got back...
+    $Envato->prettyPrint($files);
+
+    # Display thumbnails and links to the item pages.
+    foreach($files as $item) : ?>
+       <a href="<?php echo $item->url; ?>">   
+          <img src="<?php echo $item->thumbnail; ?>" />
+       </a>
+    <?php endforeach; ?>
+
 
 
    

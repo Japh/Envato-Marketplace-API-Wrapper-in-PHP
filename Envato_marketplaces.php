@@ -26,6 +26,12 @@ class Envato_marketplaces {
       return $this->curl($url)->$set; 
    }
 
+   public function balance($user_name)
+   {
+      $vitals = $this->private_user_data($user_name, 'vitals');
+      return $vitals->balance;
+   }
+
    public function public_user_data($user_name)
    {
       $url = preg_replace('/set/i', 'user:' . $user_name, $this->public_url);

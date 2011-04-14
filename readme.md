@@ -28,15 +28,12 @@ And that's really it. You now have access to all of the available functions.
     $Envato->prettyPrint($sliders);
 
 #### Get Account Balance
+    require 'Envato_marketplaces.php';
     $Envato = new Envato_marketplaces();
     $Envato->set_api_key('your api key');
-    $vitals = $Envato->private_user_data('your username', 'vitals');
 
-    # Display array for review
-    $Envato->prettyPrint($vitals);
-
-    # Echo Balance
-    echo $vitals->balance;
+    # Echo out the balance.
+    echo $Envato->balance('JeffreyWay');
 
 #### Get Featured Item
     require 'Envato_marketplaces.php';
@@ -59,6 +56,7 @@ And that's really it. You now have access to all of the available functions.
     require 'Envato_marketplaces.php';
     $Envato = new Envato_marketplaces();
 
+    # Pass in item id -- see url on item page on the marketplace.
     $item = $Envato->item_details('232428');
 
     # Only for development purposes. Review available options.

@@ -38,7 +38,7 @@ And that's really it. You now have access to all of the available functions.
     $Envato->set_api_key('your api key');
 
     # Echo out the balance.
-    echo $Envato->balance('JeffreyWay');
+    echo $Envato->balance('your username');
 
 #### Get Featured Item
     require 'Envato_marketplaces.php';
@@ -114,7 +114,7 @@ And that's really it. You now have access to all of the available functions.
     $Envato = new Envato_marketplaces();
     $Envato->set_api_key('your api key');
 
-    $account_info = $Envato->account_information('JeffreyWay');
+    $account_info = $Envato->account_information('your username');
 
     # See what we got back....
     $Envato->prettyPrint($account_info);
@@ -127,3 +127,18 @@ And that's really it. You now have access to all of the available functions.
 
     # Result Array
     $Envato->prettyPrint($pop);
+
+#### Verify a Purchase
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+    $Envato->set_api_key('your api key');
+
+    // Ensure that somebody bought your item.
+    // If successful, $verify will be an object which
+    // contains all of the purchase information.
+    $verify = $Envato->verify_purchase('your username', 'buyer purchase code');
+
+    // Quickie test. 
+    if ( isset($verify->buyer) ) echo 'bought';
+    else echo 'did not buy';
+

@@ -35,7 +35,7 @@ class Envato_marketplaces {
    public function featured($marketplace_name = 'themeforest')
    {
       $url = preg_replace('/set/i', 'features:' . $marketplace_name, $this->public_url);
-      return $this->curl($url);
+      return $this->curl($url)->features;
    }
 
    public function item_details($item_id)

@@ -13,7 +13,7 @@ And that's really it. You now have access to all of the available functions.
 
 ### Examples (to be updated)
 #### Search for Sliders Across all Marketplaces
-   $Envato = new Envato_marketplaces();
+    $Envato = new Envato_marketplaces();
     $sliders = $Envato->search('sliders');
     $Envato->prettyPrint($sliders);
 

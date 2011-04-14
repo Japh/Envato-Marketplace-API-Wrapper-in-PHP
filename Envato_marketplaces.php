@@ -66,6 +66,9 @@ class Envato_marketplaces {
    public function search($search_expression, $site_name = '', $type = '')
    {
       if ( empty($search_expression) ) return false;
+      # Can't use spaces. Need to replace them with pipes. 
+      else $search_expression = preg_replace('/\s/', '|', $search_expression);
+
       $url = preg_replace('/set/i', 'search:' . $site_name . ',' . $type . ',' . $search_expression, $this->public_url );
       return $this->curl($url)->search;
    }

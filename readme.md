@@ -23,7 +23,7 @@ And that's really it. You now have access to all of the available functions.
     $Envato->prettyPrint($sliders);
 
 ##### Limit further to a marketplace category...
-   $Envato = new Envato_marketplaces();
+    $Envato = new Envato_marketplaces();
     $sliders = $Envato->search('sliders', 'codecanyon', 'plugins');
     $Envato->prettyPrint($sliders);
 
@@ -35,8 +35,8 @@ And that's really it. You now have access to all of the available functions.
     # Display array for review
     $Envato->prettyPrint($vitals);
 
-   # Echo Balance
-   echo $vitals->balance;
+    # Echo Balance
+    echo $vitals->balance;
 
 #### Get Featured Item
     require 'Envato_marketplaces.php';

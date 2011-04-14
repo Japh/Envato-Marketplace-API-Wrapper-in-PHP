@@ -32,7 +32,10 @@ class Envato_marketplaces {
       if (! isset($set) ) return 'Missing parameters';
 
       $url = "http://marketplace.envato.com/api/edge/" .  $user_name . "/" . $this->api_key . "/" . $set . ".json";
-      return $this->curl($url)->$set; 
+      $result = $this->curl($url);
+      
+      if ( isset($result->error) ) return 'Username and/or API Key invalid.';
+      return $result->$set;
    }
 
   /**

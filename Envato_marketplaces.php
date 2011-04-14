@@ -69,6 +69,19 @@ class Envato_marketplaces {
       return $this->apply_limit($new_files, $limit);
    }
 
+   // Helper function. For more control, use new_files_from_user method 
+   // instead.
+   public function display_thumbs($user_name, $marketplace_name, $limit = null)
+   {
+      $results = $this->new_files_from_user($user_name, $marketplace_name, $limit); 
+
+      foreach($results as $item) : ?>
+       <a href="<?php echo $item->url; ?>">   
+          <img src="<?php echo $item->thumbnail; ?>" />
+       </a>
+      <?php endforeach;
+   }
+
    private function apply_limit($orig_arr, $limit)
    {
       if ( !is_int($limit) ) return $orig_arr;

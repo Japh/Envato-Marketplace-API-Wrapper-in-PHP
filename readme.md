@@ -55,6 +55,21 @@ And that's really it. You now have access to all of the available functions.
     #Free file
     echo $featured->free_file->url;
 
+#### Get Specific Item Details
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+
+    $item = $Envato->item_details('232428');
+
+    # Only for development purposes. Review available options.
+    $Envato->prettyPrint($item);
+    ?>
+
+    <h2> <?php echo $item->item; ?></h2>
+    <a href="<?php echo $item->url; ?>">
+       <img src="<?php echo $item->live_preview_url; ?>" alt="<?php echo $item->item; ?>" />
+    </a>
+
 
 
    

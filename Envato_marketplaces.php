@@ -207,7 +207,7 @@ class Envato_marketplaces {
       foreach($results as $item) : ?>
       <?php if ( is_null($item) ) break; ?>
       <li>
-          <a href="<?php echo $item->url; ?>">   
+          <a href="<?php echo $item->url . "?ref=$user_name"; ?>">   
              <img src="<?php echo $item->thumbnail; ?>" />
           </a>
       </li>

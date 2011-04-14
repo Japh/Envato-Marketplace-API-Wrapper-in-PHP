@@ -13,6 +13,7 @@ class Envato_marketplaces {
    {
       return $this->api_key;
    }
+
    /**
     * Available sets => 'vitals', 'earnings-and-sales-by-month', 'statement', 'recent-sales', 'account', 'verify-purchase', 'download-purchase'
     * 
@@ -50,16 +51,33 @@ class Envato_marketplaces {
       return $this->curl($url)->item;
    }
 
-   public function new_files($marketplace_name = 'themeforest', $category = 'wordpress')
+   public function new_files($marketplace_name = 'themeforest', $category = 'wordpress', $limit = null)
    {
       $url = preg_replace('/set/i', 'new-files:' . $marketplace_name . ','. $category, $this->public_url);
-      return $this->curl($url)->{'new-files'};
+      $new_files = $this->curl($url)->{'new-files'}; 
+
+      return $this->apply_limit($new_files, $limit);
    }
 
-   public function new_files_from_user($user_name, $marketplace_name = 'themeforest')
+   public function new_files_from_user($user_name, $marketplace_name = 'themeforest', $limit = null)
    {
       $url = preg_replace('/set/i', 'new-files-from-user:' . $user_name . ',' . $marketplace_name, $this->public_url);
-      return $this->curl($url)->{'new-files-from-user'};
+      $new_files = $this->curl($url)->{'new-files-from-user'};
+
+      // If a limit is passed, create new array from results with a count equal 
+      // to the limit. 
+      return $this->apply_limit($new_files, $limit);
+   }
+
+   private function apply_limit($orig_arr, $limit)
+   {
+      if ( !is_int($limit) ) return $orig_arr;
+
+      $new_arr = array();
+      for ( $i = 1, $len = count($orig_arr); $i <= $limit; $i++ ) {
+         $new_arr[] = $orig_arr[$i];
+      }
+      return $new_arr;
    }
 
    public function most_popular_last_week($marketplace_name = 'themeforest')

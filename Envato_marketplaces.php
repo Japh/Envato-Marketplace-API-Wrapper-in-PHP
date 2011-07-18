@@ -165,7 +165,7 @@ class Envato_marketplaces {
    public function new_files($marketplace_name = 'themeforest', $category = 'wordpress', $limit = null)
    {
       $url = preg_replace('/set/i', 'new-files:' . $marketplace_name . ','. $category, $this->public_url);
-      $new_files = $this->curl($url)->{'new-files'}; 
+      $new_files = $this->curl($url)->{'new-files'};
 
       return $this->apply_limit($new_files, $limit);
    }
@@ -231,6 +231,19 @@ class Envato_marketplaces {
       return $this->apply_limit($pop, $limit);
    }
 
+  /**
+   * Retrieve the random list of newly uploaded files.
+   *
+   * @param string $marketplace_name Desired marketplace name.
+   * @param int $limit The number of items to return [optional].
+   * @return array A list of random new files in the given marketplace.
+   */
+   public function random_new_files($marketplace_name = 'themeforest', $limit = null)
+   {
+      $url = preg_replace('/set/i', 'random-new-files:' . $marketplace_name, $this->public_url);
+      $random = $this->curl($url)->{'random-new-files'};
+      return $this->apply_limit($random, $limit);
+   }
   /**
    * Perform search queries on all of the marketplaces, or a specific one. 
    *

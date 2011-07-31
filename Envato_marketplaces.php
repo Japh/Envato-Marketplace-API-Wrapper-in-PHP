@@ -47,7 +47,6 @@ class Envato_marketplaces {
       $url = "http://marketplace.envato.com/api/edge/$user_name/$this->api_key/$set";
       if ( !is_null($purchase_code) ) $url .= ":$purchase_code";
       $url .= '.json';
-
       $result = $this->curl($url);
 
       if ( isset($result->error) ) return 'Username, API Key, or purchase code is invalid.';
@@ -66,6 +65,20 @@ class Envato_marketplaces {
    {
       $validity = $this->private_user_data($user_name, 'verify-purchase', $purchase_code);
       return isset($validity->buyer) ? $validity : false;
+   }
+
+  /**
+   * Can be used to verify if a person did in fact purchase your item.
+   *
+   * @param $user_name Author's username.
+   * @param $purchase_code - The buyer's purchase code. See Downloads page for 
+   * receipt.
+   * @return object|bool If purchased, returns an object containing the details.
+   */ 
+   public function download_purchase($user_name, $purchase_code)
+   {
+      $download_url = $this->private_user_data($user_name, 'download-purchase', $purchase_code);
+      return isset($download_url->download_url) ? $download_url->download_url : false;
    }
 
   /**

@@ -68,12 +68,12 @@ class Envato_marketplaces {
    }
 
   /**
-   * Can be used to verify if a person did in fact purchase your item.
+   * Can be used to retrieve the download URL for a purchased item.
    *
-   * @param $user_name Author's username.
-   * @param $purchase_code - The buyer's purchase code. See Downloads page for 
+   * @param $user_name Purchaser's username.
+   * @param $purchase_code - The item purchase code. See Downloads page for 
    * receipt.
-   * @return object|bool If purchased, returns an object containing the details.
+   * @return string If purchased, returns a string containing the download URL.
    */ 
    public function download_purchase($user_name, $purchase_code)
    {

@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
 /**
  * Wrapper class for the Envato marketplaces API.
  *
@@ -14,7 +11,7 @@ ini_set('display_errors', '1');
 
 class Envato_marketplaces {
    protected $api_key;
-   public $cache_dir = 'cache';
+   protected $cache_dir = 'cache';
    public $cache_expires = 3;
    protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
 
@@ -45,6 +42,31 @@ class Envato_marketplaces {
       if ( ! isset($this->api_key) ) return 'No API Key is set.';
       return $this->api_key;
    }
+
+
+  /**
+   * Attach your API key. 
+   *
+   * @param string $api_key Can be accessed on the marketplaces via My Account 
+   * -> My Settings -> API Key
+   */
+   public function set_cache_dir($cache_dir)
+   {
+      $this->cache_dir = $cache_dir;
+   }
+
+  /**
+   * Retrieve the value of your API KEY, if needed.
+   *
+   * @return string The requested API Key.
+   */
+   public function get_cache_dir()
+   {
+      return $this->cache_dir;
+   }   
+
+
+
 
    /**
     * Available sets => 'vitals', 'earnings-and-sales-by-month', 'statement', 'recent-sales', 'account', 'verify-purchase', 'download-purchase'

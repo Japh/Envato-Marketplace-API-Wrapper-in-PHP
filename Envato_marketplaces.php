@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 /**
  * Wrapper class for the Envato marketplaces API.
  *
@@ -173,7 +176,11 @@ class Envato_marketplaces {
    public function new_files($marketplace_name = 'themeforest', $category = 'wordpress', $limit = null)
    {
       $url = preg_replace('/set/i', 'new-files:' . $marketplace_name . ','. $category, $this->public_url);
-      return $this->apply_limit( $this->fetch($url, 'new-files'), $limit );
+      $results = $this->fetch($url, 'new-files');
+
+      if ( $results ) {
+         return $this->apply_limit($results, $limit);
+      }
    }
 
   /**
@@ -189,6 +196,7 @@ class Envato_marketplaces {
       $cache_path = "$this->cache_dir/$user_name-$marketplace_name-new_files";
 
       $url = preg_replace('/set/i', 'new-files-from-user:' . $user_name . ',' . $marketplace_name, $this->public_url);
+      
       return $this->apply_limit( $this->fetch($url, 'new-files-from-user'), $limit );
    }
    
@@ -297,12 +305,16 @@ class Envato_marketplaces {
       if ( $this->has_expired($cache_path) ) {
          // get fresh copy
          $data = $this->curl($url);
-         $data = $set ? $data->{$set} : $data; // if a set is needed, update
+
+         if ($data) {
+            $data = isset($set) ? $data->{$set} : $data; // if a set is needed, update
+         } else exit('Could not retrieve data.');
          
          $this->cache_it($cache_path, $data);
 
          return $data;
       } else {
+         echo 'cached';
          // if available in cache, use that
          return json_decode(file_get_contents($cache_path));
       }
@@ -346,7 +358,9 @@ class Envato_marketplaces {
       $data = curl_exec($ch);
       curl_close($ch);
 
-      return json_decode($data);
+      $data = json_decode($data);
+
+      return $data; // string or null
    }
 
 
@@ -358,6 +372,7 @@ class Envato_marketplaces {
    */
    protected function cache_it($cache_path, $data)
    {
+      if ( !isset($data) ) return;
       !file_exists($this->cache_dir) && mkdir($this->cache_dir);
       file_put_contents( $cache_path, json_encode($data) );
 

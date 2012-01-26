@@ -206,7 +206,7 @@ class Envato_marketplaces {
    public function display_thumbs($user_name, $marketplace_name, $limit = null)
    {
       $results = $this->new_files_from_user($user_name, $marketplace_name, $limit); 
-      print_r($results);
+
       echo "<ul class='envato-marketplace-thumbs'> \n";
       foreach($results as $item) : ?>
       <?php if ( is_null($item) ) break; ?>

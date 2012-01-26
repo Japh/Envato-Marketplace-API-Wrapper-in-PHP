@@ -13,7 +13,7 @@ ini_set('display_errors', '1');
 
 
 class Envato_marketplaces {
-   public $api_key;
+   protected $api_key;
    public $cache_dir = 'cache';
    public $cache_expires = 3;
    protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
@@ -196,7 +196,7 @@ class Envato_marketplaces {
       $cache_path = "$this->cache_dir/$user_name-$marketplace_name-new_files";
 
       $url = preg_replace('/set/i', 'new-files-from-user:' . $user_name . ',' . $marketplace_name, $this->public_url);
-      
+
       return $this->apply_limit( $this->fetch($url, 'new-files-from-user'), $limit );
    }
    
@@ -235,7 +235,7 @@ class Envato_marketplaces {
    * @return array A list of the most sold items in the given marketplace last 
    * week.
    */
-   public function most_popular_last_week($marketplace_name = 'themeforest')
+   public function most_popular($marketplace_name = 'themeforest')
    {
       $url = preg_replace('/set/i', 'popular:' . $marketplace_name, $this->public_url);
       return $this->fetch($url, 'popular');
@@ -327,7 +327,7 @@ class Envato_marketplaces {
    * @param int $limit Specifies the number of array items in the result.
    * @return array A new array with a count equal to the passed $limit.
    */
-   protected function apply_limit($orig_arr, $limit)
+   public function apply_limit($orig_arr, $limit)
    {
       if ( !is_int($limit) ) return $orig_arr;
 

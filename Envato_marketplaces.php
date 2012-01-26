@@ -314,7 +314,6 @@ class Envato_marketplaces {
 
          return $data;
       } else {
-         echo 'cached';
          // if available in cache, use that
          return json_decode(file_get_contents($cache_path));
       }

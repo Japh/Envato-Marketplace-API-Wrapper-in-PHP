@@ -206,13 +206,13 @@ class Envato_marketplaces {
    public function display_thumbs($user_name, $marketplace_name, $limit = null)
    {
       $results = $this->new_files_from_user($user_name, $marketplace_name, $limit); 
-      
+      print_r($results);
       echo "<ul class='envato-marketplace-thumbs'> \n";
       foreach($results as $item) : ?>
       <?php if ( is_null($item) ) break; ?>
       <li>
-          <a href="<?php echo $item->url . "?ref=$user_name"; ?>">   
-             <img src="<?php echo $item->thumbnail; ?>" />
+          <a href="<?php echo $item->url . "?ref=$user_name"; ?>" title="<?php echo $item->item;?>">   
+             <img src="<?php echo $item->thumbnail; ?>" alt="<?php echo $item->item?>">
           </a>
       </li>
       <?php endforeach;

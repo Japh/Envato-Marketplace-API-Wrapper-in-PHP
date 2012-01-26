@@ -13,7 +13,7 @@ class Envato_marketplaces {
    protected $api_key;
    protected $cache_dir = 'cache';
    public $cache_expires = 3;
-   protected $public_url = 'http://marketplace.envato.com/api/edge/{set}.json';
+   protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
 
    
    function __construct($api_key = null) {
@@ -53,6 +53,7 @@ class Envato_marketplaces {
    {
       $this->cache_dir = $cache_dir;
    }
+   
 
   /**
    * Retrieve the value of your cache directory, if needed.
@@ -63,8 +64,6 @@ class Envato_marketplaces {
    {
       return $this->cache_dir;
    }   
-
-
 
 
    /**

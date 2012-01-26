@@ -13,7 +13,7 @@ class Envato_marketplaces {
    protected $api_key;
    protected $cache_dir = 'cache';
    public $cache_expires = 3;
-   protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
+   protected $public_url = 'http://marketplace.envato.com/api/edge/{set}.json';
 
    
    function __construct($api_key = null) {
@@ -45,10 +45,9 @@ class Envato_marketplaces {
 
 
   /**
-   * Attach your API key. 
+   * Sets the cache directory for all API calls. 
    *
-   * @param string $api_key Can be accessed on the marketplaces via My Account 
-   * -> My Settings -> API Key
+   * @param string $cache_dir 
    */
    public function set_cache_dir($cache_dir)
    {
@@ -56,9 +55,9 @@ class Envato_marketplaces {
    }
 
   /**
-   * Retrieve the value of your API KEY, if needed.
+   * Retrieve the value of your cache directory, if needed.
    *
-   * @return string The requested API Key.
+   * @return string The requested cache directory.
    */
    public function get_cache_dir()
    {

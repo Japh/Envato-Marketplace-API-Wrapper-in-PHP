@@ -1,4 +1,5 @@
-This is still a work in progress, but it should work just fine. Let me know if you notice any issues. 
+This class is a wrapper for the Envato Marketplace API. It provides easy-to-remember methods to view your items, search the marketplace,
+get personal, private data, view collections, etc. It also will automatically caches the results - so that you don't hammer the API needlessly!
 
 ### Usage 
 First, include the class in your project. 
@@ -30,12 +31,11 @@ And that's really it. You now have access to all of the available functions.
 ##### Limit further to a marketplace category...
     $Envato = new Envato_marketplaces();
     $sliders = $Envato->search('sliders', 'codecanyon', 'plugins');
-    $Envato->prettyPrint($sliders);
+    $Envato->prettyPrint($sliders);    
 
 #### Get Account Balance
     require 'Envato_marketplaces.php';
-    $Envato = new Envato_marketplaces();
-    $Envato->set_api_key('your api key');
+    $Envato = new Envato_marketplaces( 'YOUR_API_KEY');
 
     # Echo out the balance.
     echo $Envato->balance('your username');
@@ -123,7 +123,7 @@ And that's really it. You now have access to all of the available functions.
     require 'Envato_marketplaces.php';
     $Envato = new Envato_marketplaces();
     
-    $pop = $Envato->most_popular_last_week('marketplace name', 'optional limit');
+    $pop = $Envato->most_popular_last_week('marketplace name');
 
     # Result Array
     $Envato->prettyPrint($pop);
@@ -142,3 +142,16 @@ And that's really it. You now have access to all of the available functions.
     if ( isset($verify->buyer) ) echo 'bought';
     else echo 'did not buy';
 
+#### Set the Cache Directory
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+
+    $Envato->cache_dir = 'path/to/directory'; // defaults to 'cache'
+
+#### Delete All Cached Files
+    require 'Envato_marketplaces.php';
+    $Envato = new Envato_marketplaces();
+
+    // ...
+
+    $Envato->clear_cache();

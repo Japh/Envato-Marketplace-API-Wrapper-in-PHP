@@ -12,7 +12,7 @@
 class Envato_marketplaces {
    protected $api_key;
    protected $cache_dir = 'cache';
-   public $cache_expires = 3;
+   public $cache_expires = 24;
    protected $public_url = 'http://marketplace.envato.com/api/edge/set.json';
 
    
